@@ -50,12 +50,14 @@ end
 
 def titleize(string)
 
+	# On utilise la méthode capitalize pour transformer le premier mot ("The")
+	string.capitalize!
 	# On définit une liste des mots dont il ne faut pas mettre la première lettre en majuscule.
 	words_not_to_capitalize = ["the", "and"]
 
 	# On sépare chaque mot de la chaîne de caractère en utilisant la méthode split(" "). La méthode split renvoie un tableau dont chaque élément est un des mots de la phrase. 
 	# Si les mots ne sont pas compris dans la liste word_not_to_capitalize, leur première lettre est transformée en majuscule. Sinon, ils restent inchangés.
-	phrase = string.split(" ").map{|word|
+	array = string.split(" ").map{|word|
 		if words_not_to_capitalize.include?(word)
 			word = word
 		else
@@ -63,11 +65,6 @@ def titleize(string)
 		end
 	}
 
-	# On retourne le premier mot ("the") avec la première lettre en majuscule et les mots suivants déjà sous la bonne forme en utilisant la méthode join(" ")
-	return phrase[0].capitalize + " " + phrase[1..-1].join(" ")
+	# On retourne la phrase sous la bonne forme en utilisant la méthode join(" ")
+	return array.join(" ")
 end
-
-
-puts titleize("jaws")
-puts titleize("david cop")
-puts titleize("the bridge over the river kwai")
