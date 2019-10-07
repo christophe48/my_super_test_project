@@ -1,38 +1,73 @@
-def echo(mot)
- return mot
+def echo(string)
+	return string
 end
 
-def shout(mot)
-  return mot.upcase
+
+# ----------------------------------------------------------------
+
+def shout(string)
+	return string.upcase
 end
 
-def repeat(mot,a=2)
-   return (mot + " ") * (a - 1) + mot
-end
-#puts repeat("hello",2)
 
-#start of word: 2 façons
+# ----------------------------------------------------------------
+
+def repeat(string, times = 2) # Le paramètre times est optionnel et sa valeur par défaut est 2.
+	return (string + " ") * (times - 1) + string
+end
+
+
+# ----------------------------------------------------------------
+
+def start_of_word(string, number)
+
+	# On transforme la chaine de caractères en un tableau dont chaque élément est une lettre
+	tableau = string.split("")
+	#
+	return tableau[0..number-1].join("")
+end
+
 #def start_of_word(mot,a) #le a est le nombre de lettre
- #if a != 0
-  #  a-= 1
-   #return mot[0..a]
- #else
-#   return mot[0..a]
-# end
+#	if a != 0
+#		a-= 1
+#		return mot[0..a]
+#	else
+#   	return mot[0..a]
+# 	end
 #end
-#puts start_of_word("salut",2)
 
-def start_of_word(mot,a)
-  tableau = mot.split("")
-return tableau[0..a-1].join("")
-end
-#puts start_of_word("salut",3)
+
+# ----------------------------------------------------------------
 
 def first_word(string)
-  phrase = string.split(" ") #split coupera par défault la phrase a chaque espace
-  return phrase[0]
+	tableau = string.split(" ")
+	return tableau[0]
+
 end
 
-def titleize(phrase)
-  phrase.split.map(&:capitalize).join(" ")
+
+# ----------------------------------------------------------------
+
+def titleize(string)
+
+	# On définit une liste des mots dont il ne faut pas mettre la première lettre en majuscule.
+	words_not_to_capitalize = ["the", "and"]
+
+	# On sépare chaque mot de la chaîne de caractère en utilisant la méthode split(" "). La méthode split renvoie un tableau dont chaque élément est un des mots de la phrase. 
+	# Si les mots ne sont pas compris dans la liste word_not_to_capitalize, leur première lettre est transformée en majuscule. Sinon, ils restent inchangés.
+	phrase = string.split(" ").map{|word|
+		if words_not_to_capitalize.include?(word)
+			word = word
+		else
+			word = word.capitalize
+		end
+	}
+
+	# On retourne le premier mot ("the") avec la première lettre en majuscule et les mots suivants déjà sous la bonne forme en utilisant la méthode join(" ")
+	return phrase[0].capitalize + " " + phrase[1..-1].join(" ")
 end
+
+
+puts titleize("jaws")
+puts titleize("david cop")
+puts titleize("the bridge over the river kwai")
